@@ -10,6 +10,12 @@ A dedicated administration UI to monitor and manage common Kafka administrative 
 - Uses [Kafka-node](https://github.com/SOHU-Co/kafka-node) as the Kafka Client
 
 ### How it works
+- Producers produces or writes data to Kafka brokers or Kafka topics.
+- Consumers, on the other hand, read data or — as the name implies — consume data from Kafka topics or Kafka brokers.
+- Kafka client allows you to read, write and process streams of events in parallel.
+- Nodejs serves as a backend and reads/writes/updates using Kafka Client. This layer has all the business logic.
+- The backend is hosted by Express Server and exposes a REST endpoint (a Graphql endpoint in future).
+- The UI reads/writes using this endpoint.
 
 ### Prerequisites
 
