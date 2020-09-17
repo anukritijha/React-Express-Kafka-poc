@@ -1,27 +1,45 @@
+import "react-app-polyfill/ie11";
+import "@patternfly/react-core/dist/styles/base.css";
 import React from "react";
-import logo from "./logo.svg";
+import { useHistory, Redirect } from "react-router-dom";
+import { AppLayout, SwitchWith404, LazyRoute } from "use-patternfly";
 import "./App.css";
 
-const App: React.FC<any> = () => {
-  const callApi = async () => {
-    const response = await fetch("/api/consumergroups");
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    console.log("body", body);
-    return body;
-  };
+const navItems = [
+  {
+    title: "Consumer Groups",
+    to: "/",
+    exact: true,
+  },
+  {
+    title: "Topics",
+    to: "/topics",
+  },
+];
+
+export const App = () => {
+  const history = useHistory();
+  const logoProps = React.useMemo(
+    () => ({
+      onClick: () => history.push("/"),
+    }),
+    [history]
+  );
+
+  const getConsumerGroupsPage = () => import("./pages/ConsumerGroupsPage");
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <input type="submit" value="Submit" onClick={() => callApi()} />
-      </header>
-    </div>
+    <AppLayout
+      // logo={Logo}
+      logoProps={logoProps}
+      navVariant={"vertical"}
+      navItems={navItems}
+      navGroupsStyle={"expandable"}
+    >
+      <SwitchWith404>
+        <LazyRoute path="/" exact={true} getComponent={getConsumerGroupsPage} />
+        <Redirect path={"/topics"} to={"/"} exact={true} />
+      </SwitchWith404>
+    </AppLayout>
   );
 };
-
-export default App;
