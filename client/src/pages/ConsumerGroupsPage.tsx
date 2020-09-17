@@ -5,20 +5,8 @@ import { useA11yRouteChange, useDocumentTitle } from "use-patternfly";
 import { ConsumerGroups, IConsumerGroup } from "components/ConsumerGroups";
 import { proxyUrl } from "config";
 
-export interface ICustomerGroupRest {
-  memberId: string;
-  clientId: string;
-  clientHost: string;
-  subscription: string;
-  version: number;
-  userData: string;
-  groupId: string;
-}
-
 interface ICustomerGroupResponse {
   count: number;
-  next: string;
-  previous?: string;
   results: IConsumerGroup[];
 }
 
@@ -40,20 +28,19 @@ export default function CustomerGroupsPage() {
     [searchParams, history]
   );
 
-  const { data, isPending } = useFetch<any>(proxyUrl + "/api/consumergroups", {
-    headers: { Accept: "application/json" },
-  });
+  const { data, isPending } = useFetch<ICustomerGroupResponse>(
+    proxyUrl + "/api/consumergroups",
+    {
+      headers: { Accept: "application/json" },
+    }
+  );
 
   const { results = [], count: total = 0 } = data || {};
-  console.log("results", data && Object.keys(data), data);
 
-  const rows = results.map((cgroup: any) => ({
-    memberId: cgroup.memberId,
-    clientId: cgroup.clientId,
-    clientHost: cgroup.clientHost,
-    subscription: cgroup.subscription,
-    version: cgroup.version,
-    userData: cgroup.userData,
+  const rows = results.map((cgroup) => ({
+    brokerId: cgroup.brokerId,
+    partition: Object.values(cgroup.partition)[0].length,
+    topic: cgroup.topic,
     groupId: cgroup.groupId,
   }));
 
@@ -65,7 +52,7 @@ export default function CustomerGroupsPage() {
         rows={rows}
         total={total}
         onPageChange={handlePageChange}
-        onPerPageChange={() => alert("Sorry, SWApi doesn't support this")}
+        onPerPageChange={() => alert("Work in Progress")}
         loading={isPending}
       />
     </>

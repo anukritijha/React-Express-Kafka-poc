@@ -11,12 +11,9 @@ import {
 import "@patternfly/react-styles/css/components/Toolbar/toolbar.css";
 
 export interface IConsumerGroup {
-  memberId: string;
-  clientId: string;
-  clientHost: string;
-  subscription: number;
-  version: number;
-  userData: string;
+  brokerId: string;
+  partition: number;
+  topic: string;
   groupId: string;
 }
 
@@ -48,34 +45,25 @@ export const ConsumerGroups: React.FunctionComponent<IConsumerGroupProps> = ({
   };
 
   const tableColumns = [
-    { title: "Member ID", transforms: [sortable] },
-    { title: "Client ID", transforms: [sortable] },
-    { title: "Client Host", transforms: [sortable] },
-    { title: "Subscription", transforms: [sortable] },
-    { title: "Version", transforms: [sortable] },
-    { title: "User Data", transforms: [sortable] },
+    { title: "Broker ID", transforms: [sortable] }, 
+    { title: "Partitions", transforms: [sortable] },
+    { title: "Topic", transforms: [sortable] },
     { title: "Group Id", transforms: [sortable] },
   ];
 
   const toTableCells = (consumerGroup: IConsumerGroup) => {
     const {
-      memberId,
-      clientId,
-      clientHost,
-      subscription,
-      version,
-      userData,
+      brokerId,
+      partition,
+      topic,
       groupId,
     } = consumerGroup || {};
 
     const tableRow: IRowData = {
       cells: [
-        memberId,
-        clientId,
-        clientHost,
-        subscription,
-        version,
-        userData,
+        brokerId,
+        partition,
+        topic,
         groupId,
       ],
       originalData: consumerGroup,

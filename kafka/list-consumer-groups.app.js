@@ -4,20 +4,40 @@ var listGroups = (request, response) => {
   const client = new kafka.KafkaClient();
   const admin = new kafka.Admin(client);
 
-  let jsonGroups = {};
+  let groupMetadata = {};
 
   admin.listGroups((err, resGroups) => {
     const consumerGroups = Object.keys(resGroups);
 
     admin.describeGroups(consumerGroups, (err, resGroupMetadata) => {
-      jsonGroups = JSON.stringify(resGroupMetadata, null, 1);
-      response.json(jsonGroups);
+      groupMetadata = getGroupMetadata(resGroupMetadata);
+      response.json(groupMetadata);
     });
 
     if (err) {
-      jsonGroups = { error: e };
+      groupMetadata = { error: e };
     }
   });
+};
+
+var getGroupMetadata = (resGroupMetadata) => {
+  let groupKeys = Object.keys(resGroupMetadata);
+  let responseGroupData = groupKeys.map((key) => {
+    if (resGroupMetadata.hasOwnProperty(key)) {
+      var val = resGroupMetadata[key];
+      return {
+        groupId: val.groupId,
+        brokerId: val.brokerId,
+        topic: val.members[0].memberMetadata.subscription[0],
+        partition: val.members[0].memberAssignment.partitions,
+      };
+    }
+  });
+  const finalResponse = {
+    results: responseGroupData,
+    count: responseGroupData.count,
+  };
+  return finalResponse;
 };
 
 module.exports = {
