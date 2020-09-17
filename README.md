@@ -1,8 +1,8 @@
 ### Prerequisites
 
-#### The latest versions of Node.js and npm installed on your machine
-#### The latest Java version (JVM) installed on your machine
-#### Kafka installed on your local machine.
+- The latest versions of Node.js and npm installed on your machine
+- The latest Java version (JVM) installed on your machine
+- Kafka installed on your local machine.
 
 ### `yarn start`
 
