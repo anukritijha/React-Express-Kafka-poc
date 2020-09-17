@@ -4,7 +4,7 @@ A dedicated administration UI to monitor and manage common Kafka administrative 
 ![Adminitrative UI Screenshot](/public/React-Kafka-poc.png?raw=true "Kafka Dashboard")
 
 ### Features
-- Javascript based UI, usind the React framework.
+- Javascript based UI, using the React framework.
 - UI implemented using patternfly framework
 - Hosted via Express server and backend based on Node.js
 - Uses [Kafka-node](https://github.com/SOHU-Co/kafka-node) as the Kafka Client
