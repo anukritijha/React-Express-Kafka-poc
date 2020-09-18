@@ -1,7 +1,7 @@
 ## Kafka Administration UI
 A dedicated administration UI to monitor and manage common Kafka administrative tasks.
 
-![Adminitrative UI Screenshot](/public/React-Kafka-poc.png?raw=true "Kafka Dashboard")
+![Adminitrative UI Screenshot](/public/React-Kafka-poc-with-broker.png?raw=true "Kafka Dashboard")
 
 ### Features
 - Javascript based UI, using the React framework.
