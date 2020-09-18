@@ -45,33 +45,25 @@ export const ConsumerGroups: React.FunctionComponent<IConsumerGroupProps> = ({
   };
 
   const tableColumns = [
-    { title: "Broker ID", transforms: [sortable] }, 
+    { title: "Broker ID", transforms: [sortable] },
     { title: "Partitions", transforms: [sortable] },
     { title: "Topic", transforms: [sortable] },
     { title: "Group Id", transforms: [sortable] },
   ];
 
   const toTableCells = (consumerGroup: IConsumerGroup) => {
-    const {
-      brokerId,
-      partition,
-      topic,
-      groupId,
-    } = consumerGroup || {};
+    const { brokerId, partition, topic, groupId } = consumerGroup || {};
 
     const tableRow: IRowData = {
-      cells: [
-        brokerId,
-        partition,
-        topic,
-        groupId,
-      ],
+      cells: [brokerId, partition, topic, groupId],
       originalData: consumerGroup,
     };
     return tableRow;
   };
 
   const tableRows = rows && rows.map(toTableCells);
+
+  const actions = [{ title: "Edit" }, { title: "Delete" }];
   return (
     <PageSection>
       <div className="pf-c-toolbar">
@@ -81,6 +73,7 @@ export const ConsumerGroups: React.FunctionComponent<IConsumerGroupProps> = ({
         variant={TableVariant.compact}
         cells={tableColumns}
         rows={tableRows}
+        actions={actions}
         aria-label="consumerGroup list"
       >
         <TableHeader

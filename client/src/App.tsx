@@ -15,6 +15,10 @@ const navItems = [
     title: "Topics",
     to: "/topics",
   },
+  {
+    title: "Brokers",
+    to: "/brokers",
+  },
 ];
 
 export const App = () => {
@@ -39,6 +43,7 @@ export const App = () => {
       <SwitchWith404>
         <LazyRoute path="/" exact={true} getComponent={getConsumerGroupsPage} />
         <Redirect path={"/topics"} to={"/"} exact={true} />
+        <Redirect path={"/brokers"} to={"/"} exact={true} />
       </SwitchWith404>
     </AppLayout>
   );
