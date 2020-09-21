@@ -8,7 +8,7 @@ import "./App.css";
 const navItems = [
   {
     title: "Consumer Groups",
-    to: "/",
+    to: "/consumergroups",
     exact: true,
   },
   {
@@ -18,7 +18,7 @@ const navItems = [
   {
     title: "Brokers",
     to: "/brokers",
-  },
+  }
 ];
 
 export const App = () => {
@@ -31,6 +31,7 @@ export const App = () => {
   );
 
   const getConsumerGroupsPage = () => import("./pages/ConsumerGroupsPage");
+  const getLoginPage=()=>import("./pages/LoginPage")
 
   return (
     <AppLayout
@@ -41,9 +42,10 @@ export const App = () => {
       navGroupsStyle={"expandable"}
     >
       <SwitchWith404>
-        <LazyRoute path="/" exact={true} getComponent={getConsumerGroupsPage} />
-        <Redirect path={"/topics"} to={"/"} exact={true} />
-        <Redirect path={"/brokers"} to={"/"} exact={true} />
+        <LazyRoute path="/consumergroups" exact={true} getComponent={getConsumerGroupsPage} />
+        <Redirect path={"/topics"} to={"/consumergroups"} exact={true} />
+        <Redirect path={"/brokers"} to={"/consumergroups"} exact={true} />
+        <LazyRoute path="/" exact={true} getComponent={getLoginPage} />
       </SwitchWith404>
     </AppLayout>
   );

@@ -1,6 +1,6 @@
 const kafka = require("kafka-node");
 
-var listGroups = (request, response) => {
+const listGroups = (request, response) => {
   const client = new kafka.KafkaClient();
   const admin = new kafka.Admin(client);
 
@@ -20,11 +20,12 @@ var listGroups = (request, response) => {
   });
 };
 
-var getGroupMetadata = (resGroupMetadata) => {
+const getGroupMetadata = (resGroupMetadata) => {
   let groupKeys = Object.keys(resGroupMetadata);
   let responseGroupData = groupKeys.map((key) => {
     if (resGroupMetadata.hasOwnProperty(key)) {
       var val = resGroupMetadata[key];
+      console.log("val", val);
       return {
         groupId: val.groupId,
         brokerId: val.brokerId,
@@ -33,6 +34,7 @@ var getGroupMetadata = (resGroupMetadata) => {
       };
     }
   });
+
   const finalResponse = {
     results: responseGroupData,
     count: responseGroupData.count,
