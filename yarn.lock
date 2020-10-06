@@ -1150,6 +1150,14 @@ node-abi@^2.7.0:
   dependencies:
     semver "^5.4.1"
 
+node-zookeeper-client@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/node-zookeeper-client/-/node-zookeeper-client-1.1.0.tgz#256c5b79d00108eff349d68d1efe7a5e78933e89"
+  integrity sha512-Vp9kP8noRV6LcNcHg4/1wjDfxLDbRfnaXoBIbw87ZkG1fPi4H/mIs9ko5dNrniAq7wK6ugBEUGZ1Wzy0VkMnFw==
+  dependencies:
+    async "~0.2.7"
+    underscore "~1.4.4"
+
 node-zookeeper-client@~0.2.2:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/node-zookeeper-client/-/node-zookeeper-client-0.2.3.tgz#48c79129c56b8e898df9bd3bdad9e27dcad63851"
