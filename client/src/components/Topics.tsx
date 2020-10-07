@@ -10,8 +10,8 @@ import {
 } from "@patternfly/react-table";
 import "@patternfly/react-styles/css/components/Toolbar/toolbar.css";
 export interface ITopic {
-  topic: any;
-  partitions: any;
+  topic: String;
+  partitions: number;
 }
 
 export interface ITopicProps {
@@ -68,11 +68,11 @@ export const Topics: React.FunctionComponent<ITopicProps> = ({
         cells={tableColumns}
         rows={tableRows}
         actions={actions}
-        aria-label="consumerGroup list"
+        aria-label="Topics list"
       >
         <TableHeader
-          id="consumerGroup-list-table-header"
-          aria-label="Table header for consumerGroups list"
+          id="topics-list-table-header"
+          aria-label="Table header for topics list"
         />
         <TableBody />
       </Table>

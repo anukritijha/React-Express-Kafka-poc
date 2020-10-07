@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableBody,
   IRowData,
-  sortable,
+  sortable
 } from "@patternfly/react-table";
 import "@patternfly/react-styles/css/components/Toolbar/toolbar.css";
 
@@ -34,21 +34,21 @@ export const ConsumerGroups: React.FunctionComponent<IConsumerGroupProps> = ({
   total,
   loading,
   onPageChange,
-  onPerPageChange,
+  onPerPageChange
 }) => {
   const paginationProps = {
     itemCount: total,
     page: page,
     perPage: perPage,
     onSetPage: (_: any, page: number) => onPageChange(page),
-    onPerPageSelect: (_: any, page: number) => onPerPageChange(page),
+    onPerPageSelect: (_: any, page: number) => onPerPageChange(page)
   };
 
   const tableColumns = [
     { title: "Broker ID", transforms: [sortable] },
     { title: "Partitions", transforms: [sortable] },
     { title: "Topic", transforms: [sortable] },
-    { title: "Group Id", transforms: [sortable] },
+    { title: "Group Id", transforms: [sortable] }
   ];
 
   const toTableCells = (consumerGroup: IConsumerGroup) => {
@@ -56,7 +56,7 @@ export const ConsumerGroups: React.FunctionComponent<IConsumerGroupProps> = ({
 
     const tableRow: IRowData = {
       cells: [brokerId, partition, topic, groupId],
-      originalData: consumerGroup,
+      originalData: consumerGroup
     };
     return tableRow;
   };
@@ -74,11 +74,11 @@ export const ConsumerGroups: React.FunctionComponent<IConsumerGroupProps> = ({
         cells={tableColumns}
         rows={tableRows}
         actions={actions}
-        aria-label="consumerGroup list"
+        aria-label="Topics list"
       >
         <TableHeader
-          id="consumerGroup-list-table-header"
-          aria-label="Table header for consumerGroups list"
+          id="topics-list-table-header"
+          aria-label="Table header for topics list"
         />
         <TableBody />
       </Table>

@@ -48,8 +48,6 @@ export const App = () => {
           exact={true}
           getComponent={getTopicsListPage}
         />
-        <Redirect path={"/topics"} to={"/"} exact={true} />
-        <Redirect path={"/brokers"} to={"/"} exact={true} />
       </SwitchWith404>
     </AppLayout>
   );
