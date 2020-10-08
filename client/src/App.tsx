@@ -9,29 +9,28 @@ const navItems = [
   {
     title: "Consumer Groups",
     to: "/",
-    exact: true
+    exact: true,
   },
   {
     title: "Topics",
-    to: "/topics"
+    to: "/topics",
   },
   {
     title: "Brokers",
-    to: "/brokers"
-  }
+    to: "/brokers",
+  },
 ];
 
 export const App = () => {
   const history = useHistory();
   const logoProps = React.useMemo(
     () => ({
-      onClick: () => history.push("/")
+      onClick: () => history.push("/"),
     }),
     [history]
   );
 
   const getConsumerGroupsPage = () => import("./pages/ConsumerGroupsPage");
-  const getTopicsListPage = () => import("./pages/TopicsListPage");
 
   return (
     <AppLayout
@@ -43,11 +42,7 @@ export const App = () => {
     >
       <SwitchWith404>
         <LazyRoute path="/" exact={true} getComponent={getConsumerGroupsPage} />
-        <LazyRoute
-          path="/topics"
-          exact={true}
-          getComponent={getTopicsListPage}
-        />
+        <Redirect path={"/topics"} to={"/"} exact={true} />
         <Redirect path={"/brokers"} to={"/"} exact={true} />
       </SwitchWith404>
     </AppLayout>
