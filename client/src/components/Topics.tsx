@@ -9,16 +9,13 @@ import {
   sortable
 } from "@patternfly/react-table";
 import "@patternfly/react-styles/css/components/Toolbar/toolbar.css";
-
-export interface IConsumerGroup {
-  brokerId: string;
-  partition: number;
-  topic: string;
-  groupId: string;
+export interface ITopic {
+  topic: String;
+  partitions: number;
 }
 
-export interface IConsumerGroupProps {
-  rows: IConsumerGroup[];
+export interface ITopicProps {
+  rows: ITopic[];
   perPage: number;
   page: number;
   total: number;
@@ -27,7 +24,7 @@ export interface IConsumerGroupProps {
   onPerPageChange: (page: number) => void;
 }
 
-export const ConsumerGroups: React.FunctionComponent<IConsumerGroupProps> = ({
+export const Topics: React.FunctionComponent<ITopicProps> = ({
   rows,
   page,
   perPage,
@@ -45,18 +42,15 @@ export const ConsumerGroups: React.FunctionComponent<IConsumerGroupProps> = ({
   };
 
   const tableColumns = [
-    { title: "Broker ID", transforms: [sortable] },
-    { title: "Partitions", transforms: [sortable] },
     { title: "Topic", transforms: [sortable] },
-    { title: "Group Id", transforms: [sortable] }
+    { title: "Partitions", transforms: [sortable] }
   ];
 
-  const toTableCells = (consumerGroup: IConsumerGroup) => {
-    const { brokerId, partition, topic, groupId } = consumerGroup || {};
-
+  const toTableCells = (singleTopic: ITopic) => {
+    const { topic, partitions } = singleTopic || {};
     const tableRow: IRowData = {
-      cells: [brokerId, partition, topic, groupId],
-      originalData: consumerGroup
+      cells: [topic, partitions],
+      originalData: singleTopic
     };
     return tableRow;
   };
