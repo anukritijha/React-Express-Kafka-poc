@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const groups = require("./kafka/list-consumer-groups.app");
-const topics = require("./kafka/list-topics")
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -14,6 +13,5 @@ app.use((req, res, next) => {
 });
 
 app.get("/api/consumergroups", groups.listGroups);
-app.get("/api/topics", topics.listTopic);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

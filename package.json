@@ -10,7 +10,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "nodemon": "^2.0.4",
-    "kafka-node": "^5.0.0"
+    "kafka-node": "^2.6.1"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
