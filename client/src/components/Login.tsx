@@ -5,9 +5,9 @@ import {
   LoginFooterItem,
   LoginForm,
   LoginMainFooterBandItem,
-  LoginMainFooterLinksItem,
+  LoginMainFooterLinksItem
 } from "@patternfly/react-core";
-import ExclamationCircleIcon from "@patternfly/react-icons/dist/js/icons/exclamation-circle-icon";
+import { ExclamationCircleIcon } from "@patternfly/react-icons";
 
 export const Login: React.FC<any> = () => {
   const [showHelperText, setShowHelperText] = useState<boolean>(false);
@@ -43,12 +43,13 @@ export const Login: React.FC<any> = () => {
       &nbsp;Invalid login credentials.
     </React.Fragment>
   );
-  
+
   const socialMediaLoginContent = (
     <React.Fragment>
       <LoginMainFooterLinksItem
-        href="#"
+        href="http://localhost:5000/auth/google"
         linkComponentProps={{ "aria-label": "Login with Google" }}
+        // onClick={onGoogleLogin}
       >
         <svg
           aria-hidden="true"
@@ -59,7 +60,7 @@ export const Login: React.FC<any> = () => {
         </svg>
       </LoginMainFooterLinksItem>
       <LoginMainFooterLinksItem
-        href="#"
+        href="http://localhost:5000/auth/github"
         linkComponentProps={{ "aria-label": "Login with Github" }}
       >
         <svg
@@ -83,7 +84,7 @@ export const Login: React.FC<any> = () => {
         </svg>
       </LoginMainFooterLinksItem>
       <LoginMainFooterLinksItem
-        href="#"
+        href="http://localhost:5000/auth/facebook"
         linkComponentProps={{ "aria-label": "Login with Facebook" }}
       >
         <svg
@@ -159,7 +160,7 @@ export const Login: React.FC<any> = () => {
     sm: "/assets/images/pfbg_768.jpg",
     sm2x: "/assets/images/pfbg_768@2x.jpg",
     xs: "/assets/images/pfbg_576.jpg",
-    xs2x: "/assets/images/pfbg_576@2x.jpg",
+    xs2x: "/assets/images/pfbg_576@2x.jpg"
   };
 
   return (
