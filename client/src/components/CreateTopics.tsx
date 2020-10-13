@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { KafkaClient as Client } from "kafka-node";
+import axios from "axios";
 import {
   Modal,
   Button,
@@ -11,21 +11,12 @@ export const CreateTopics = () => {
   const [topic, setTopic] = useState("");
   const [partition, setPartition] = useState("");
   const [replicationFactor, setReplicationFactor] = useState("");
-
-  const sendTopic = (topic: any, partition: any, replicationFactor: any) => {
-    const kafkaHost = "localhost:9092";
-    const client = new Client({ kafkaHost });
-    var topicsToCreate = [
-      {
-        topic: topic,
-        partitions: partition,
-        replicationFactor: replicationFactor
-      }
-    ];
-    client.createTopics(topicsToCreate, (error, result) => {
-      console.log(error);
-    });
+  var topicInfo = {
+    topic,
+    partition,
+    replicationFactor
   };
+
   const [modalView, setModalView] = useState(false);
 
   const handleModalToggle = () => {
@@ -34,11 +25,14 @@ export const CreateTopics = () => {
 
   const onConfirmDialog = () => {
     setModalView(false);
-    sendTopic(topic, partition, replicationFactor);
+    axios
+      .post("http://localhost:5000/topics", topicInfo)
+      .then(() => console.log("Topic created"))
+      .catch(err => {
+        console.error(err);
+      });
   };
-  if (modalView) {
-    console.log(topic);
-  }
+
   return (
     <>
       <Button variant="primary" onClick={handleModalToggle}>

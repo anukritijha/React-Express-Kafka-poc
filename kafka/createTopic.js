@@ -1,15 +1,16 @@
 var kafka = require('kafka-node');
- function createTopic(topic,partitions,replicationFactor)  {
+ function createTopic({topicInfo}) {
 var client = new kafka.KafkaClient();
+console.log(topicInfo)
  
 var topicsToCreate = [{
-  topic: topic,
-  partitions: partitions,
-  replicationFactor: replicationFactor
+  topic: topicInfo.topic,
+  partitions: topicInfo.partition,
+  replicationFactor: topicInfo.replicationFactor
 }]
 client.createTopics(topicsToCreate, (error, result) => {
     console.log(result)
   });
 }
-module.exports = {createTopic,}
+module.exports = {createTopic}
  
