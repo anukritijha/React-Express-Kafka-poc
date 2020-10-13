@@ -1,5 +1,6 @@
 import React from "react";
 import { PageSection, Pagination } from "@patternfly/react-core";
+import CreateTopics from "/home/suyash/Kafka/React-Express-Kafka-poc/client/src/components/CreateTopics";
 import {
   Table,
   TableVariant,
@@ -63,6 +64,7 @@ export const Topics: React.FunctionComponent<ITopicProps> = ({
       <div className="pf-c-toolbar">
         <Pagination {...paginationProps} variant={"top"} />
       </div>
+      <CreateTopics />
       <Table
         variant={TableVariant.compact}
         cells={tableColumns}
