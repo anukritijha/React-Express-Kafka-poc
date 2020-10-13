@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-//import kafka from "/home/suyash/Kafka/React-Express-Kafka-poc/node_modules/kafka-node/types/index"
 import { KafkaClient as Client } from "kafka-node";
 import {
   Modal,
   Button,
   Form,
   FormGroup,
-  TextInput,
-  TextArea
+  TextInput
 } from "@patternfly/react-core";
-import createTopic from "./createTopic";
 export const CreateTopics = () => {
   const [topic, setTopic] = useState("");
   const [partition, setPartition] = useState("");
   const [replicationFactor, setReplicationFactor] = useState("");
 
   const sendTopic = (topic: any, partition: any, replicationFactor: any) => {
-    //var client = new kafka.KafkaClient();
     const kafkaHost = "localhost:9092";
     const client = new Client({ kafkaHost });
     var topicsToCreate = [
@@ -31,22 +27,12 @@ export const CreateTopics = () => {
     });
   };
   const [modalView, setModalView] = useState(false);
-  /*const [formData, setFormData] = useState({
-    name: "",
-    partition: "",
-    replicationFactor:""
-  });*/
+
   const handleModalToggle = () => {
     setModalView(!modalView);
   };
-  /*const onChangeInput = (value: string, evt: any) => {
-    const elementName = evt?.target?.name;
-    const newFormData = { ...formData };
-    (newFormData as any)[elementName] = value;
-    setFormData(newFormData);
-  };*/
+
   const onConfirmDialog = () => {
-    //sendTopic(topic,partition,replicationFactor)
     setModalView(false);
     sendTopic(topic, partition, replicationFactor);
   };
