@@ -1,6 +1,6 @@
 import React from "react";
 import { PageSection, Pagination } from "@patternfly/react-core";
-import CreateTopics from "/home/suyash/Kafka/React-Express-Kafka-poc/client/src/components/CreateTopics";
+import CreateTopics from "./CreateTopics";
 import {
   Table,
   TableVariant,
