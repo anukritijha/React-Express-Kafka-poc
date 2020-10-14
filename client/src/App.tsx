@@ -3,13 +3,13 @@ import "@patternfly/react-core/dist/styles/base.css";
 import React, { useState } from "react";
 import { useHistory, Redirect } from "react-router-dom";
 import { AppLayout, SwitchWith404, LazyRoute } from "use-patternfly";
-import { Brand, Avatar, Page } from "@patternfly/react-core";
+import { Avatar } from "@patternfly/react-core";
 import "./App.css";
 import { AppNavHeader } from "./components";
-import brandImg from "./logo.svg";
 import avatarImg from "./assests/images/img_avatar.svg";
-import { AuthContext } from "./context";
+import { AuthContext, useAuth } from "./context";
 import { PrivateRoute } from "./components";
+import { NavToolBar } from "components/NavToolbar";
 
 const getConsumerGroupsPage = () => import("./pages/ConsumerGroupsPage");
 const getLoginPage = () => import("./pages/LoginPage");
@@ -39,20 +39,21 @@ export const App = () => {
     [history]
   );
 
+  const [authTokens, setAuthTokens] = useState();
   //const brandImgLogo = <Brand src={brandImg} alt={"Managed Kafka"} />;
-  const avatar = <Avatar src={avatarImg} className="app-avatar" alt="avatar" />;
+  const avatar = authTokens && (
+    <Avatar src={avatarImg} className="app-avatar" alt="avatar" />
+  );
   const HeaderTools = () => (
     <div className="pf-c-page__header-tools">
       <AppNavHeader
         // logo={brandImgLogo}
         logoProps={logoProps}
         avatar={avatar}
-        //toolbar={<NavToolBar />}
+        toolbar={<NavToolBar />}
       />
     </div>
   );
-
-  const [authTokens, setAuthTokens] = useState();
 
   const setTokens = (data: any) => {
     localStorage.setItem("tokens", JSON.stringify(data));
@@ -60,15 +61,15 @@ export const App = () => {
   };
 
   return (
-    <AppLayout
-      //logo={Logo}
-      logoProps={logoProps}
-      navVariant={"vertical"}
-      navItems={navItems}
-      navGroupsStyle={"expandable"}
-      headerTools={<HeaderTools />}
-    >
-      <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+      <AppLayout
+        //logo={Logo}
+        logoProps={logoProps}
+        navVariant={"vertical"}
+        navItems={navItems}
+        navGroupsStyle={"expandable"}
+        headerTools={<HeaderTools />}
+      >
         <SwitchWith404>
           <PrivateRoute
             path="/"
@@ -79,7 +80,7 @@ export const App = () => {
           <Redirect path={"/brokers"} to={"/consumergroups"} exact={true} />
           <LazyRoute path="/login" exact={true} getComponent={getLoginPage} />
         </SwitchWith404>
-      </AuthContext.Provider>
-    </AppLayout>
+      </AppLayout>
+    </AuthContext.Provider>
   );
 };

@@ -20,7 +20,7 @@ node_modules/
 .history
 
 #server
-/kafka-server/config/mykeys.js
+/kafka-server/config/keys.js
 
 npm-debug.log*
 yarn-debug.log*
