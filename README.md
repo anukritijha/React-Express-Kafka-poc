@@ -29,3 +29,32 @@ A dedicated administration UI to monitor and manage common Kafka administrative 
 - Start Zookeeper and Broker.
 - Create Topics, Producers, Consumers and Consumer Groups.
 - Run `yarn install` and `yarn start`.
+
+
+### Example queries
+
+#### Fetch topics
+
+```
+{
+  topics{
+    partitions
+    topic
+  }
+}
+```
+
+#### Fetch consumergroups
+
+```
+{
+  consumergroups{
+    results{
+      brokerId
+      groupId
+      topic
+    }
+    count
+  }
+}
+```
