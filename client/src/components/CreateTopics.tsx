@@ -4,6 +4,7 @@ import {
   Modal,
   Button,
   Form,
+  Alert,
   FormGroup,
   TextInput
 } from "@patternfly/react-core";
@@ -16,21 +17,24 @@ export const CreateTopics = () => {
     partition,
     replicationFactor
   };
-
+  const [confirmView, setConfirmView] = useState(false);
   const [modalView, setModalView] = useState(false);
-
   const handleModalToggle = () => {
     setModalView(!modalView);
   };
-
+  const onConfirm = () => {
+    window.location.reload(true);
+  };
   const onConfirmDialog = () => {
-    setModalView(false);
     axios
-      .post("http://localhost:5000/topics", topicInfo)
-      .then(() => console.log("Topic created"))
+      .post("http://localhost:5000/api/topics", topicInfo)
+      .then(bar => console.log(bar.data))
+      //require bar.data to contain null if no error and cause of error if error is present
       .catch(err => {
         console.error(err);
       });
+    setModalView(!modalView);
+    setConfirmView(true);
   };
 
   return (
@@ -69,6 +73,7 @@ export const CreateTopics = () => {
             fieldId="partitions-create"
             label="No. of partitions"
             isRequired
+            type="number"
           >
             <TextInput
               id="partitions-create"
@@ -80,6 +85,7 @@ export const CreateTopics = () => {
           <FormGroup
             fieldId="replication-factor-create"
             label="Replication Factor"
+            type="number"
             isRequired
           >
             <TextInput
@@ -91,6 +97,12 @@ export const CreateTopics = () => {
           </FormGroup>
         </Form>
       </Modal>
+      {confirmView && (
+        <Alert
+          title={"Topic " + topic + " has been created successfully"}
+          actionClose={<Button onClick={onConfirm}>Confirm</Button>}
+        ></Alert>
+      )}
     </>
   );
 };
