@@ -40,7 +40,7 @@ export const CreateTopics: React.FunctionComponent<ICreateTopicsProps> = ({
       .post("http://localhost:5000/api/topics", topicInfo)
       .then(errorData => {
         errorData.data.length
-          ? setError("Error " + bar.data[0].error)
+          ? setError("Error " + errorData.data[0].error)
           : setError(" Success! Topic " + topic + " created");
       })
 
