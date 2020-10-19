@@ -13,13 +13,10 @@ export interface ICreateTopicsProps {
   error: any;
   setError: (value: any) => any;
 }
-
-//export const CreateTopics = () => {
 export const CreateTopics: React.FunctionComponent<ICreateTopicsProps> = ({
   error,
   setError
 }) => {
-  var confirm = true;
   const [topic, setTopic] = useState("");
   const [partition, setPartition] = useState("");
   const [replicationFactor, setReplicationFactor] = useState("");
@@ -41,8 +38,8 @@ export const CreateTopics: React.FunctionComponent<ICreateTopicsProps> = ({
   const onConfirmDialog = () => {
     axios
       .post("http://localhost:5000/api/topics", topicInfo)
-      .then(bar => {
-        bar.data.length
+      .then(errorData => {
+        errorData.data.length
           ? setError("Error " + bar.data[0].error)
           : setError(" Success! Topic " + topic + " created");
       })

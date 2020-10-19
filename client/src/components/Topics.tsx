@@ -14,7 +14,6 @@ export interface ITopic {
   topic: String;
   partitions: number;
 }
-
 export interface ITopicProps {
   rows: ITopic[];
   perPage: number;
