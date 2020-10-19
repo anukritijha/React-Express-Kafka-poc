@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PageSection, Pagination } from "@patternfly/react-core";
 import CreateTopics from "./CreateTopics";
 import {
@@ -21,6 +21,8 @@ export interface ITopicProps {
   page: number;
   total: number;
   loading: boolean;
+  error: any;
+  setError: (value: any) => any;
   onPageChange: (page: number) => void;
   onPerPageChange: (page: number) => void;
 }
@@ -30,6 +32,8 @@ export const Topics: React.FunctionComponent<ITopicProps> = ({
   page,
   perPage,
   total,
+  error,
+  setError,
   loading,
   onPageChange,
   onPerPageChange
@@ -55,6 +59,7 @@ export const Topics: React.FunctionComponent<ITopicProps> = ({
     };
     return tableRow;
   };
+  console.log(error);
 
   const tableRows = rows && rows.map(toTableCells);
 
@@ -64,7 +69,7 @@ export const Topics: React.FunctionComponent<ITopicProps> = ({
       <div className="pf-c-toolbar">
         <Pagination {...paginationProps} variant={"top"} />
       </div>
-      <CreateTopics />
+      <CreateTopics error={error} setError={setError} />
       <Table
         variant={TableVariant.compact}
         cells={tableColumns}

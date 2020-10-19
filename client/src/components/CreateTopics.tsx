@@ -8,7 +8,18 @@ import {
   FormGroup,
   TextInput
 } from "@patternfly/react-core";
-export const CreateTopics = () => {
+
+export interface ICreateTopicsProps {
+  error: any;
+  setError: (value: any) => any;
+}
+
+//export const CreateTopics = () => {
+export const CreateTopics: React.FunctionComponent<ICreateTopicsProps> = ({
+  error,
+  setError
+}) => {
+  var confirm = true;
   const [topic, setTopic] = useState("");
   const [partition, setPartition] = useState("");
   const [replicationFactor, setReplicationFactor] = useState("");
@@ -19,17 +30,23 @@ export const CreateTopics = () => {
   };
   const [confirmView, setConfirmView] = useState(false);
   const [modalView, setModalView] = useState(false);
+
   const handleModalToggle = () => {
     setModalView(!modalView);
   };
   const onConfirm = () => {
-    window.location.reload(true);
+    setConfirmView(!confirmView);
   };
+
   const onConfirmDialog = () => {
     axios
       .post("http://localhost:5000/api/topics", topicInfo)
-      .then(bar => console.log(bar.data))
-      //require bar.data to contain null if no error and cause of error if error is present
+      .then(bar => {
+        bar.data.length
+          ? setError("Error " + bar.data[0].error)
+          : setError(" Success! Topic " + topic + " created");
+      })
+
       .catch(err => {
         console.error(err);
       });
@@ -99,7 +116,7 @@ export const CreateTopics = () => {
       </Modal>
       {confirmView && (
         <Alert
-          title={"Topic " + topic + " has been created successfully"}
+          title={error}
           actionClose={<Button onClick={onConfirm}>Confirm</Button>}
         ></Alert>
       )}

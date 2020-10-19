@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFetch } from "react-async";
 import { useHistory, useLocation } from "react-router-dom";
 import { useA11yRouteChange, useDocumentTitle } from "use-patternfly";
@@ -11,6 +11,8 @@ export interface ITopicsResponse {
 }
 
 export default function TopicsPage() {
+  const [error, setError] = useState("");
+
   useDocumentTitle("Kafka Dashboard");
   useA11yRouteChange();
   const location = useLocation();
@@ -45,6 +47,8 @@ export default function TopicsPage() {
     <>
       <Topics
         page={page}
+        error={error}
+        setError={setError}
         perPage={topic.length || 10}
         rows={rows}
         total={topic.length}
