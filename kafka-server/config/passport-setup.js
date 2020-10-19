@@ -66,8 +66,18 @@ passport.use(
      clientSecret:keys.github.clientSecret,
      callbackURL:keys.github.callbackUrl
     },(accessToken,refreshToken,profile,done)=>{
-      console.log("profile: ",profile);
-      done(null,profile);     
+      //console.log("profile: ",profile);
+      //done(null,profile);
+      findOrCreate(
+        profile,
+        done,
+        {profileId:profile.id},
+        {
+            profileId:profile.id,
+            username:profile.displayName,
+            thumbnail:profile._json.picture
+        }
+       );   
     })
 );
 
