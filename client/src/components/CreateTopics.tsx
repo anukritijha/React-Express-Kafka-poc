@@ -8,6 +8,7 @@ import {
   FormGroup,
   TextInput
 } from "@patternfly/react-core";
+import { CloseIcon } from "@patternfly/react-icons";
 
 export interface ICreateTopicsProps {
   error: any;
@@ -114,7 +115,7 @@ export const CreateTopics: React.FunctionComponent<ICreateTopicsProps> = ({
       {confirmView && (
         <Alert
           title={error}
-          actionClose={<Button onClick={onConfirm}>Confirm</Button>}
+          actionClose={<CloseIcon onClick={onConfirm}>Confirm</CloseIcon>}
         ></Alert>
       )}
     </>
