@@ -40,6 +40,26 @@ var getGroupMetadata = (resGroupMetadata) => {
   return finalResponse;
 };
 
+var getGroupMetadata2 = (resGroupMetadata) => {
+  let groupKeys = Object.keys(resGroupMetadata);
+  let responseGroupData = groupKeys.map((key) => {
+    if (resGroupMetadata.hasOwnProperty(key)) {
+      var val = resGroupMetadata[key];
+      return {
+        groupId: val.groupId,
+        brokerId: val.brokerId,
+        topic: val.members[0].memberMetadata.subscription[0],
+      };
+    }
+  });
+  const finalResponse = {
+    results: responseGroupData,
+    count: responseGroupData.length,
+  };
+  return finalResponse;
+};
+
 module.exports = {
   listGroups,
+  getGroupMetadata2
 };
